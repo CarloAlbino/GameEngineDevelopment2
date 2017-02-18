@@ -1,10 +1,10 @@
 #pragma once
 
 #include "SceneNode.h"
-#include "glm\glm.hpp"
-#include <glm\gtx\matrix_decompose.hpp>
-#include "glm\gtc\matrix_transform.hpp"
-#include <vector>
+//#include "glm\glm.hpp"
+//#include <glm\gtx\matrix_decompose.hpp>
+//#include "glm\gtc\matrix_transform.hpp"
+//#include <vector>
 
 class Square : public SceneNode
 {

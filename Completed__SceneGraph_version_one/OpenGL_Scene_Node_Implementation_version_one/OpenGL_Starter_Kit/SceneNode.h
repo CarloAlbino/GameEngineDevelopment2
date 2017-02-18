@@ -1,12 +1,15 @@
 #ifndef SCENENODE_HEADER
 #define SCENENODE_HEADER
 
+#define _USE_MATH_DEFINES
+
 
 #include "glm\glm.hpp"
 #include <glm\gtx\matrix_decompose.hpp>
 #include "glm\gtc\matrix_transform.hpp"
 #include <vector>
 #include "GL\glut.h"
+#include <cmath>
 
 class SceneNode
 {
