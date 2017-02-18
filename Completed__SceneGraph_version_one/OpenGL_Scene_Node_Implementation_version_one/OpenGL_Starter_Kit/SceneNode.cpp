@@ -64,8 +64,15 @@ void SceneNode::render()
 	//Step Two: glPushMatrix(My Transformation)
 	glPushMatrix();
 	glTranslatef(translation.x, translation.y, translation.z);
+
+	float angle = 2 * acos(rotation.w);
+	angle = angle * 180 / 3.14159265358979323846;
 	float sqrtOfW = sqrt(1 - rotation.w * rotation.w);
-	glRotatef(2 * acos(rotation.w), rotation.x / sqrtOfW, rotation.y / sqrtOfW, rotation.z / sqrtOfW); 
+
+	if (sqrtOfW != 0)
+	{
+		glRotatef(angle, rotation.x / sqrtOfW, rotation.y / sqrtOfW, rotation.z / sqrtOfW);
+	}
 
 
 	//Step Three: Draw myself
