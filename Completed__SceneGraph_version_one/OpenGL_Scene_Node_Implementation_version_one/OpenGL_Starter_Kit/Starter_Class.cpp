@@ -5,6 +5,8 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+#include "Cone.h"
+#include "Circle.h"
 
 float rotation_angle = 0.0f;
 float x, y=0;
@@ -18,7 +20,7 @@ void myDisplay(void)
 	glLoadIdentity();
 
 	glm::mat4 rot = glm::rotate(glm::mat4(1.0), rotation_angle, glm::vec3(1, 1, 1));
-	Cube* redTank = new Cube(rot, 1);
+	Circle* redTank = new Circle(rot, 1);
 	redTank->setColor(1.0, 0.0, 0.0);
 	redTank->render();
 
