@@ -17,7 +17,7 @@ void Triangle::draw()
 
 	float xPoint = m_height / 2 * m_scale.x;
 
-	glVertex2f(-xPoint / 2, -m_height / 3 * m_scale.y);
+	glVertex2f(-xPoint, -m_height / 3 * m_scale.y);
 	glVertex2f(xPoint, -m_height / 2 * m_scale.y);
 	glVertex2f(0, m_height * m_scale.y);
 

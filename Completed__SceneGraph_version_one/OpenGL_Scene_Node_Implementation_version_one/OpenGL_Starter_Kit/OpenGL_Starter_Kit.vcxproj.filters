@@ -45,6 +45,9 @@
     <ClCompile Include="Circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StairCase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Square.h">
@@ -74,10 +77,13 @@
     <ClInclude Include="Circle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Primitves.h">
+    <ClInclude Include="CompositeModels.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CompositeModels.h">
+    <ClInclude Include="StairCase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitives.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

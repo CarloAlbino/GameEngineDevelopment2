@@ -1,6 +1,4 @@
 #pragma once
-
-#include "SceneNode.h"
 #include "Square.h"
 
 class Tank : public SceneNode

@@ -47,3 +47,8 @@ void Cube::draw()
 
 	glEnd();
 }
+
+float Cube::GetSide()
+{
+	return m_side;
+}

@@ -10,6 +10,8 @@ public:
 
 	void draw() override;
 
+	float GetSide();
+
 private:
 	float m_side;
 

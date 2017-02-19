@@ -1,10 +1,9 @@
 #include <math.h>
-#include "Primitves.h"
+#include "Primitives.h"
 #include "CompositeModels.h"
 
 float rotation_angle = 0.0f;
-float x, y=0;
-
+float x, y = 0;
 
 void myDisplay(void)
 {
@@ -14,9 +13,9 @@ void myDisplay(void)
 	glLoadIdentity();
 
 	glm::mat4 rot = glm::rotate(glm::mat4(1.0), rotation_angle, glm::vec3(1, 1, 1));
-	Cone* redTank = new Cone(rot, 1.0f);
+	StairCase* redTank = new StairCase(rot, 1.0f);
 	redTank->setColor(1.0, 0.0, 0.0);
-	redTank->SetScale(2, 1, 1);
+	redTank->SetScale(1, 1, 1);
 	redTank->render();
 
 	Tank blueTank = Tank(glm::translate(glm::mat4(1.0f), glm::vec3(-x, y, 0)), 0.1);
