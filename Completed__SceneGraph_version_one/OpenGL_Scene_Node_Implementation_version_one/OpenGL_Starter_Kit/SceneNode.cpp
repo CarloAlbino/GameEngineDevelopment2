@@ -7,12 +7,44 @@
 ///////////////////////////////////////////////////////////////////////
 using namespace std;
 
-SceneNode::SceneNode(glm::mat4 aTransformation, float aScale)
+SceneNode::SceneNode(glm::mat4 transformation, float scale)
 {
-	transformation = aTransformation;
+	m_transformation = transformation;
 	parent = nullptr;
 	children = std::vector<SceneNode*>();
-	scale = aScale;
+
+	m_scale.x = scale;
+	m_scale.y = scale;
+	m_scale.z = scale;
+
+	r = 1.0f;
+	g = 1.0f;
+	b = 1.0f;
+}
+
+SceneNode::SceneNode(glm::mat4 transformation, glm::vec2 scale)
+{
+	m_transformation = transformation;
+	parent = nullptr;
+	children = std::vector<SceneNode*>();
+
+	m_scale.x = scale.x;
+	m_scale.y = scale.y;
+	m_scale.z = 1.0f;
+
+	r = 1.0f;
+	g = 1.0f;
+	b = 1.0f;
+}
+
+SceneNode::SceneNode(glm::mat4 transformation, glm::vec3 scale)
+{
+	m_transformation = transformation;
+	parent = nullptr;
+	children = std::vector<SceneNode*>();
+
+	m_scale = scale;
+
 	r = 1.0f;
 	g = 1.0f;
 	b = 1.0f;
@@ -24,6 +56,27 @@ void SceneNode::setColor(float R, float G, float B)
 	g = G;
 	b = B;
 }
+
+void SceneNode::SetScale(float x, float y, float z)
+{
+	m_scale.x = x;
+	m_scale.y = y;
+	m_scale.z = z;
+}
+
+void SceneNode::SetScale(glm::vec2 scale)
+{
+	m_scale.x = scale.x;
+	m_scale.y = scale.y;
+	m_scale.z = 1.0f;
+}
+
+void SceneNode::SetScale(glm::vec3 scale)
+{
+	m_scale = scale;
+}
+
+
 void SceneNode::setParent(SceneNode* p)
 {
 	parent = p;
@@ -33,12 +86,11 @@ void SceneNode::addChild(SceneNode* child)
 {
 	children.push_back(child);
 	(*child).setParent(this);
-
 }
 
 glm::mat4 SceneNode::getTransformationMatrix()
 {
-	return transformation;
+	return m_transformation;
 }
 
 std::vector<SceneNode*> SceneNode::getChildren()
@@ -74,11 +126,9 @@ void SceneNode::render()
 		glRotatef(angle, rotation.x / sqrtOfW, rotation.y / sqrtOfW, rotation.z / sqrtOfW);
 	}
 
-
 	//Step Three: Draw myself
 	glColor3f(r, g, b);
-	draw(scale);
-
+	draw();
 
 	//Step Four: Render My Children
 	for (int i = 0; i < children.size(); i++)

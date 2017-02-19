@@ -1,14 +1,14 @@
 #pragma once
-
 #include "SceneNode.h"
-//#include "glm\glm.hpp"
-//#include <glm\gtx\matrix_decompose.hpp>
-//#include "glm\gtc\matrix_transform.hpp"
-//#include <vector>
 
 class Triangle : public SceneNode
 {
 public:
-	Triangle::Triangle(glm::mat4 transformation,  float scale);
-	void draw(float scale) override;
+	Triangle::Triangle(glm::mat4 transformation, float scale, float height = 1.0f);
+	Triangle::Triangle(glm::mat4 transformation, glm::vec2 scale, float height = 1.0f);
+
+	void draw() override;
+
+private:
+	float m_height;
 };

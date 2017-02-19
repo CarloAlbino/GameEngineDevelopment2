@@ -1,12 +1,6 @@
 #include <math.h>
-#include "Square.h"
-#include "Triangle.h"
-#include "Tank.h"
-#include "Cube.h"
-#include "Sphere.h"
-#include "Cylinder.h"
-#include "Cone.h"
-#include "Circle.h"
+#include "Primitves.h"
+#include "CompositeModels.h"
 
 float rotation_angle = 0.0f;
 float x, y=0;
@@ -20,8 +14,9 @@ void myDisplay(void)
 	glLoadIdentity();
 
 	glm::mat4 rot = glm::rotate(glm::mat4(1.0), rotation_angle, glm::vec3(1, 1, 1));
-	Circle* redTank = new Circle(rot, 1);
+	Cone* redTank = new Cone(rot, 1.0f);
 	redTank->setColor(1.0, 0.0, 0.0);
+	redTank->SetScale(2, 1, 1);
 	redTank->render();
 
 	Tank blueTank = Tank(glm::translate(glm::mat4(1.0f), glm::vec3(-x, y, 0)), 0.1);

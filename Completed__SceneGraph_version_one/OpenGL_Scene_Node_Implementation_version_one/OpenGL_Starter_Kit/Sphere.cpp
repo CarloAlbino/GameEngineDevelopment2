@@ -1,14 +1,22 @@
 #include "Sphere.h"
 
-Sphere::Sphere(glm::mat4 transformation, float scale) : SceneNode(transformation, scale)
+Sphere::Sphere(glm::mat4 transformation, float scale, float radius) : SceneNode(transformation, scale)
 {
 	rings = 10;
 	sectors = 15;
+	m_radius = radius;
 }
 
-void Sphere::draw(float _scale)
+Sphere::Sphere(glm::mat4 transformation, glm::vec3 scale, float radius)
+	: SceneNode(transformation, scale)
 {
-	scale = _scale;
+	rings = 10;
+	sectors = 15;
+	m_radius = radius;
+}
+
+void Sphere::draw()
+{
 	CalculateSphereCoordinates();
 
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -19,7 +27,6 @@ void Sphere::draw(float _scale)
 	glNormalPointer(GL_FLOAT, 0, &normals[0]);
 	glTexCoordPointer(2, GL_FLOAT, 0, &texcoords[0]);
 	glDrawElements(GL_LINE_LOOP, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
-
 }
 
 /*
@@ -48,9 +55,9 @@ void Sphere::CalculateSphereCoordinates()
 		*t++ = s*S;
 		*t++ = r*R;
 
-		*v++ = x * scale / 2;
-		*v++ = y * scale / 2;
-		*v++ = z * scale / 2;
+		*v++ = x * m_radius * m_scale.x;
+		*v++ = y * m_radius * m_scale.y;
+		*v++ = z * m_radius * m_scale.z;
 
 		*n++ = x;
 		*n++ = y;

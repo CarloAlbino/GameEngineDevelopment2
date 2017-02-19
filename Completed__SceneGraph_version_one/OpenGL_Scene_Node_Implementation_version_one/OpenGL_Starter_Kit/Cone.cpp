@@ -1,13 +1,21 @@
 #include "Cone.h"
 
-Cone::Cone(glm::mat4 transformation, float scale) : SceneNode(transformation, scale)
+Cone::Cone(glm::mat4 transformation, float scale, float radius, float height) : SceneNode(transformation, scale)
 {
+	m_radius = radius;
+	m_height = height;
 }
 
-void Cone::draw(float scale)
+Cone::Cone(glm::mat4 transformation, glm::vec3 scale, float radius, float height)
+	:SceneNode(transformation, scale)
 {
-	float radius = scale / 2;
-	float halfLength = scale / 2;
+	m_radius = radius;
+	m_height = height;
+}
+
+void Cone::draw()
+{
+	float halfLength = m_height / 2 * m_scale.y;
 	float slices = 24;
 
 	float theta = 0;
@@ -22,9 +30,10 @@ void Cone::draw(float scale)
 		// Top
 		glVertex3f(0.0, halfLength, 0.0);
 		// Bottom
-		glVertex3f(radius * cos(angle + theta), -halfLength, radius * sin(angle + theta));
-		glVertex3f(radius * cos(angle), -halfLength, radius * sin(angle));
+		glVertex3f(m_radius * cos(angle + theta) * m_scale.x, -halfLength, m_radius * sin(angle + theta) * m_scale.z);
+		glVertex3f(m_radius * cos(angle) * m_scale.x, -halfLength, m_radius * sin(angle) * m_scale.z);
 		glVertex3f(0.0, -halfLength, 0.0);
 	}
+
 	glEnd();
 }

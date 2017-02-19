@@ -1,12 +1,18 @@
 #include "Circle.h"
 
-Circle::Circle(glm::mat4 transformation, float scale) : SceneNode(transformation, scale)
+Circle::Circle(glm::mat4 transformation, float scale, float radius) : SceneNode(transformation, scale)
 {
+	m_radius = radius;
 }
 
-void Circle::draw(float scale)
+Circle::Circle(glm::mat4 transformation, glm::vec2 scale, float radius)
+	:SceneNode(transformation, scale)
 {
-	float radius = scale / 2;
+	m_radius = radius;
+}
+
+void Circle::draw()
+{
 	float slices = 36;
 
 	float theta = 0;
@@ -18,7 +24,8 @@ void Circle::draw(float scale)
 
 	for (int i = 0; i < slices; i++) {
 		float angle = theta * i;
-		glVertex2f(radius * cos(angle + theta), radius * sin(angle + theta));
+		glVertex2f(m_radius * cos(angle + theta) * m_scale.x, m_radius * sin(angle + theta) * m_scale.y);
 	}
+
 	glEnd();
 }
