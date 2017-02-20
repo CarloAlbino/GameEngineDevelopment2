@@ -11,7 +11,7 @@ Circle::Circle(glm::mat4 transformation, glm::vec2 scale, float radius)
 	m_radius = radius;
 }
 
-void Circle::draw()
+void Circle::Draw()
 {
 	float slices = 36;
 

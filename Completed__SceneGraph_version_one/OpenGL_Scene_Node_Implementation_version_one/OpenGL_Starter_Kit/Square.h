@@ -7,8 +7,9 @@ public:
 	Square::Square(glm::mat4 transformation, float scale, float side = 1.0f);
 	Square::Square(glm::mat4 transformation, glm::vec2 scale, float side = 1.0f);
 
-	void draw() override;
+	void Draw() override;
 
 private:
 	float m_side;
+
 };

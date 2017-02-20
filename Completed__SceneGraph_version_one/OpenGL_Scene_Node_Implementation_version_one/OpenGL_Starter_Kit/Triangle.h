@@ -7,8 +7,9 @@ public:
 	Triangle::Triangle(glm::mat4 transformation, float scale, float height = 1.0f);
 	Triangle::Triangle(glm::mat4 transformation, glm::vec2 scale, float height = 1.0f);
 
-	void draw() override;
+	void Draw() override;
 
 private:
 	float m_height;
+
 };

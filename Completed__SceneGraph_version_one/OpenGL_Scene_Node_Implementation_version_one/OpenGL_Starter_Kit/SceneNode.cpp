@@ -10,51 +10,56 @@ using namespace std;
 SceneNode::SceneNode(glm::mat4 transformation, float scale)
 {
 	m_transformation = transformation;
-	parent = nullptr;
-	children = std::vector<SceneNode*>();
+	m_parent = nullptr;
+	m_children = std::vector<SceneNode*>();
 
 	m_scale.x = scale;
 	m_scale.y = scale;
 	m_scale.z = scale;
 
-	r = 1.0f;
-	g = 1.0f;
-	b = 1.0f;
+	m_red = 1.0f;
+	m_green = 1.0f;
+	m_blue = 1.0f;
 }
 
 SceneNode::SceneNode(glm::mat4 transformation, glm::vec2 scale)
 {
 	m_transformation = transformation;
-	parent = nullptr;
-	children = std::vector<SceneNode*>();
+	m_parent = nullptr;
+	m_children = std::vector<SceneNode*>();
 
 	m_scale.x = scale.x;
 	m_scale.y = scale.y;
 	m_scale.z = 1.0f;
 
-	r = 1.0f;
-	g = 1.0f;
-	b = 1.0f;
+	m_red = 1.0f;
+	m_green = 1.0f;
+	m_blue = 1.0f;
 }
 
 SceneNode::SceneNode(glm::mat4 transformation, glm::vec3 scale)
 {
 	m_transformation = transformation;
-	parent = nullptr;
-	children = std::vector<SceneNode*>();
+	m_parent = nullptr;
+	m_children = std::vector<SceneNode*>();
 
 	m_scale = scale;
 
-	r = 1.0f;
-	g = 1.0f;
-	b = 1.0f;
+	m_red = 1.0f;
+	m_green = 1.0f;
+	m_blue = 1.0f;
 }
 
-void SceneNode::setColor(float R, float G, float B)
+void SceneNode::SetColor(float R, float G, float B)
 {
-	r = R;
-	g = G;
-	b = B;
+	m_red = R;
+	m_green = G;
+	m_blue = B;
+}
+
+void SceneNode::SetTransform(glm::mat4 transformation)
+{
+	m_transformation = transformation;
 }
 
 void SceneNode::SetScale(float x, float y, float z)
@@ -77,35 +82,35 @@ void SceneNode::SetScale(glm::vec3 scale)
 }
 
 
-void SceneNode::setParent(SceneNode* p)
+void SceneNode::SetParent(SceneNode* p)
 {
-	parent = p;
+	m_parent = p;
 }
 
-void SceneNode::addChild(SceneNode* child)
+void SceneNode::AddChild(SceneNode* child)
 {
-	children.push_back(child);
-	(*child).setParent(this);
+	m_children.push_back(child);
+	(*child).SetParent(this);
 }
 
-glm::mat4 SceneNode::getTransformationMatrix()
+glm::mat4 SceneNode::GetTransformationMatrix()
 {
 	return m_transformation;
 }
 
-std::vector<SceneNode*> SceneNode::getChildren()
+std::vector<SceneNode*> SceneNode::GetChildren()
 {
-	return children;
+	return m_children;
 }
-SceneNode* SceneNode::getParent()
+SceneNode* SceneNode::GetParent()
 {
-	return parent;
+	return m_parent;
 }
 
-void SceneNode::render()
+void SceneNode::Render()
 {
 	//Step One: getMyTransformation
-	glm::mat4 transf = getTransformationMatrix();
+	glm::mat4 transf = GetTransformationMatrix();
 	glm::vec3 myScale;
 	glm::quat rotation;
 	glm::vec3 translation;
@@ -127,14 +132,14 @@ void SceneNode::render()
 	}
 
 	//Step Three: Draw myself
-	glColor3f(r, g, b);
-	draw();
+	glColor3f(m_red, m_green, m_blue);
+	Draw();
 
 	//Step Four: Render My Children
-	for (int i = 0; i < children.size(); i++)
+	for (int i = 0; i < m_children.size(); i++)
 	{
-		SceneNode* tmp = children.at(i);
-		(*tmp).render();
+		SceneNode* tmp = m_children.at(i);
+		(*tmp).Render();
 	}
 
 	//Final Step: glPopMatrix()

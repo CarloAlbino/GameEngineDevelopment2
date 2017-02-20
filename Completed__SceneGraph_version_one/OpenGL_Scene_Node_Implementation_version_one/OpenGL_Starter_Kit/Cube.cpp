@@ -11,7 +11,7 @@ Cube::Cube(glm::mat4 transformation, glm::vec3 scale, float side)
 	m_side = side;
 }
 
-void Cube::draw()
+void Cube::Draw()
 {
 	glBegin(GL_LINE_LOOP);
 

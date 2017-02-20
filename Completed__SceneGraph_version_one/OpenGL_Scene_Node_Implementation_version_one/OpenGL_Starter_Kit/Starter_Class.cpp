@@ -1,50 +1,29 @@
+// Includes
 #include <math.h>
+#include <ctime>
+//
 #include "Primitives.h"
 #include "CompositeModels.h"
+////
 
-float rotation_angle = 0.0f;
-float x, y = 0;
+// Forward declarations
+void Update(void);
+void Render(void);
+void InitializeModels(void);
+void CalculateDeltaSeconds(void);
+////
 
-void myDisplay(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-	//Ready to Draw
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+// Global variables
+time_t g_lastFrameTime;
+float g_deltaSeconds = 0.01f;
 
-	glm::mat4 rot = glm::rotate(glm::mat4(1.0), rotation_angle, glm::vec3(1, 1, 1));
-	StairCase* redTank = new StairCase(rot, 1.0f);
-	redTank->setColor(1.0, 0.0, 0.0);
-	redTank->SetScale(1, 1, 1);
-	redTank->render();
+const float SWITCH_TIME = 4.0f;
+float g_switchTimer = 0.0f;
 
-	Tank blueTank = Tank(glm::translate(glm::mat4(1.0f), glm::vec3(-x, y, 0)), 0.1);
-	blueTank.setColor(0.0, 0.0, 1.0);
-	blueTank.render();
-
-	Tank greenTank = Tank(glm::translate(glm::mat4(1.0f), glm::vec3(x, -y, 0)), 0.1);
-	greenTank.setColor(0.0, 1.0, 0.0);
-	greenTank.render();
-
-	Tank whiteTank = Tank(glm::translate(glm::mat4(1.0f), glm::vec3(-x, -y, 0)), 0.1);
-	whiteTank.setColor(1.0, 1.0, 1.0);
-	whiteTank.render();
-
-	Tank bigTank = Tank(glm::translate(glm::mat4(1.0f), glm::vec3(x, 0, 0)), 0.2);
-	bigTank.setColor(1.0, 0.0, 1.0);
-	bigTank.render();
-
-	glFlush();
-}
-
-
-void myIdleFunc()
-{
-	rotation_angle += 0.001;
-	x += 0.0001;
-	y -= 0.0001;
-	glutPostRedisplay();
-}
+float g_rotationAngle = 0.0f;
+int g_modelToShow = 0;
+std::vector<SceneNode*> g_models;
+////
 
 int main(int argc, char** argv)
 {
@@ -55,8 +34,99 @@ int main(int argc, char** argv)
 	glutCreateWindow("My First Application");
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	
-	glutDisplayFunc(myDisplay);
-	glutIdleFunc(myIdleFunc);
+	InitializeModels();
+	time(&g_lastFrameTime);
+
+	glutDisplayFunc(Render);
+	glutIdleFunc(Update);
 	glutMainLoop();
+
 	return 0;
+}
+
+void Update(void)
+{
+	// DeltaSeconds
+	CalculateDeltaSeconds();
+
+	// Functionality
+	if (g_modelToShow == 2)
+	{
+		g_rotationAngle += 0.001f;
+	}
+	else
+	{
+		g_rotationAngle += 0.0001f;
+	}
+
+	g_switchTimer += g_deltaSeconds;
+	if (g_switchTimer > SWITCH_TIME)
+	{
+		g_switchTimer = 0.0f;
+		g_modelToShow++;
+		if (g_modelToShow >= g_models.size())
+		{
+			g_modelToShow = 0;
+		}
+	}
+
+	// Render
+	glutPostRedisplay();
+}
+
+void Render(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	//Ready to Draw
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	if (g_models.size() > 0)
+	{
+		// Rotate
+		glm::mat4 rot = glm::rotate(glm::mat4(1.0), g_rotationAngle, glm::vec3(1, 1, 1));
+
+		g_models[g_modelToShow]->SetTransform(rot);
+		g_models[g_modelToShow]->Render();
+	}
+
+	glFlush();
+}
+
+void InitializeModels(void)
+{
+	Cube* cube = new Cube(glm::mat4(1.0f), 1.0f);
+	cube->SetColor(1.0f, 0.0f, 0.0f);
+	cube->SetScale(1, 1, 1);
+	g_models.push_back(cube);
+
+	Cone* cone = new Cone(glm::mat4(1.0f), 1.0f);
+	cone->SetColor(1.0f, 0.0f, 0.0f);
+	cone->SetScale(1, 1, 1);
+	g_models.push_back(cone);
+
+	Sphere* sphere = new Sphere(glm::mat4(1.0f), 1.0f);
+	sphere->SetColor(1.0f, 0.0f, 0.0f);
+	sphere->SetScale(1, 1, 1);
+	g_models.push_back(sphere);
+
+	Cylinder* cylinder = new Cylinder(glm::mat4(1.0f), 1.0f);
+	cylinder->SetColor(1.0f, 0.0f, 0.0f);
+	cylinder->SetScale(1, 1, 1);
+	g_models.push_back(cylinder);
+
+	StairCase* staircase = new StairCase(glm::mat4(1.0f), 1.0f);
+	staircase->SetColor(1.0f, 0.0f, 0.0f);
+	staircase->SetScale(1, 1, 1);
+	g_models.push_back(staircase);
+}
+
+void CalculateDeltaSeconds(void)
+{
+	time_t timer;
+	time(&timer);
+
+	g_deltaSeconds = difftime(timer, g_lastFrameTime);
+
+	g_lastFrameTime = timer;
 }

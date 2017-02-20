@@ -13,7 +13,7 @@ Cylinder::Cylinder(glm::mat4 transformation, glm::vec3 scale, float radius, floa
 	m_height = height;
 }
 
-void Cylinder::draw()
+void Cylinder::Draw()
 {
 	float halfLength = m_height / 2 * m_scale.y;
 	float slices = 24;

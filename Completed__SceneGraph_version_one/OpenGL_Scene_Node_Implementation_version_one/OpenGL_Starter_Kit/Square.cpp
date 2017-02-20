@@ -11,7 +11,7 @@ Square::Square(glm::mat4 transformation, glm::vec2 scale, float side)
 	m_side = side;
 }
 
-void Square::draw()
+void Square::Draw()
 {
 	glBegin(GL_LINE_LOOP);
 

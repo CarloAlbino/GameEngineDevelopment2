@@ -11,7 +11,7 @@ Triangle::Triangle(glm::mat4 transformation, glm::vec2 scale, float height)
 	m_height = height;
 }
 
-void Triangle::draw()
+void Triangle::Draw()
 {
 	glBegin(GL_LINE_LOOP);
 
