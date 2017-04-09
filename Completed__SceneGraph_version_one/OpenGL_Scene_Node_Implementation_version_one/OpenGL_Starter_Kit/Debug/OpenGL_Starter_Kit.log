@@ -1,0 +1,2 @@
+﻿  Starter_Class.cpp
+d:\github\gameenginedevelopment2\completed__scenegraph_version_one\opengl_scene_node_implementation_version_one\opengl_starter_kit\starter_class.cpp(5): fatal error C1083: Cannot open include file: 'Camera.h': No such file or directory
