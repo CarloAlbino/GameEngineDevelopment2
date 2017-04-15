@@ -101,6 +101,14 @@ GameGrid::GameGrid(char * mapFile, glm::mat4 transformation, float scale)
 
 	// Close file
 	inFile.close();
+	// Create a filler node, this is done so that each node has 4 connected node
+	m_fillerNode = new GridNode(-1, -1, Wall);
+	// Set all the node connections
+	SetNodeConnections();
+	
+	// Create pacman
+	m_pacman = new PacMan(GetNodeAt(1, 2), 1, 2, glm::mat4(1), 1, 0.04);
+	this->AddChild(m_pacman);
 }
 
 GameGrid::~GameGrid()
@@ -109,7 +117,14 @@ GameGrid::~GameGrid()
 
 GridNode * GameGrid::GetNodeAt(int x, int y)
 {
-	return m_grid.at(y).at(x);
+	if (y > -1 && y < m_height && x > -1 && x < m_width)
+	{
+		return m_grid.at(y).at(x);
+	}
+	else
+	{
+		return m_fillerNode;
+	}
 }
 
 int GameGrid::GetWidth()
@@ -120,6 +135,49 @@ int GameGrid::GetWidth()
 int GameGrid::GetHeight()
 {
 	return m_height;
+}
+
+void GameGrid::Update(float deltaSeconds)
+{
+	m_pacman->Update(deltaSeconds);
+}
+
+void GameGrid::UpdateInput(char key, bool down)
+{
+	if (down)	// Key down
+	{
+		switch (key)
+		{
+		case 'w':
+			m_pacman->SetDirection(Up);
+		case 's':
+			m_pacman->SetDirection(Down);
+		case 'a':
+			m_pacman->SetDirection(Left);
+		case 'd':
+			m_pacman->SetDirection(Right);
+		default:
+			//do nothing
+			break;
+		}
+	}
+	else // Key up
+	{
+		switch (key)
+		{
+		case 'w':
+
+		case 's':
+
+		case 'a':
+
+		case 'd':
+
+		default:
+			//do nothing
+			break;
+		}
+	}
 }
 
 void GameGrid::Draw()
@@ -158,6 +216,52 @@ void GameGrid::Draw()
 				this->AddChild(newChildNode);
 			}
 				break;
+			}
+		}
+	}
+}
+
+void GameGrid::SetNodeConnections()
+{
+	for (int width = 0; width < m_width; width++)
+	{
+		for (int height = 0; height < m_height; height++)
+		{
+			// Add node above
+			if (GetNodeAt(width, height - 1) != nullptr)
+			{
+				GetNodeAt(width, height)->AddConnection(GetNodeAt(width, height - 1));
+			}
+			else
+			{
+				GetNodeAt(width, height)->AddConnection(nullptr);
+			}
+			// Add node below
+			if (GetNodeAt(width, height + 1) != nullptr)
+			{
+				GetNodeAt(width, height)->AddConnection(GetNodeAt(width, height + 1));
+			}
+			else
+			{
+				GetNodeAt(width, height)->AddConnection(nullptr);
+			}
+			// Add node to the left
+			if (GetNodeAt(width - 1, height) != nullptr)
+			{
+				GetNodeAt(width, height)->AddConnection(GetNodeAt(width - 1, height));
+			}
+			else
+			{
+				GetNodeAt(width, height)->AddConnection(nullptr);
+			}
+			// Add node to the right
+			if (GetNodeAt(width + 1, height) != nullptr)
+			{
+				GetNodeAt(width, height)->AddConnection(GetNodeAt(width + 1, height));
+			}
+			else
+			{
+				GetNodeAt(width, height)->AddConnection(nullptr);
 			}
 		}
 	}

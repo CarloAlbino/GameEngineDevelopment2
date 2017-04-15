@@ -154,6 +154,7 @@
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="GameGrid.cpp" />
     <ClCompile Include="GridNode.cpp" />
+    <ClCompile Include="PacMan.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Square.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="GameGrid.h" />
     <ClInclude Include="GridNode.h" />
+    <ClInclude Include="PacMan.h" />
     <ClInclude Include="Primitives.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="Sphere.h" />

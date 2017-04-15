@@ -31,6 +31,8 @@ public:
 	void SceneNode::SetParent(SceneNode* p);
 	void SceneNode::Render();
 	virtual void SceneNode::Draw() = 0;
+	virtual void SceneNode::Update(float deltaSeconds);
+	virtual void SceneNode::UpdateInput(char key, bool down);
 
 protected:
 	std::vector<SceneNode*> m_children;

@@ -149,4 +149,14 @@ void SceneNode::Render()
 
 }
 
+void SceneNode::Update(float deltaSeconds)
+{
+	printf("not implemented on this node\n");
+}
+
+void SceneNode::UpdateInput(char key, bool down)
+{
+	printf("not implemented on this node\n");
+}
+
 
