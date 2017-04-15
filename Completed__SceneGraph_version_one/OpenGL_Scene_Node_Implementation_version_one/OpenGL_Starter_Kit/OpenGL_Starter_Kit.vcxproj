@@ -152,6 +152,8 @@
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="GameGrid.cpp" />
+    <ClCompile Include="GridNode.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Square.cpp" />
@@ -166,6 +168,8 @@
     <ClInclude Include="Cone.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="GameGrid.h" />
+    <ClInclude Include="GridNode.h" />
     <ClInclude Include="Primitives.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="Sphere.h" />
@@ -173,6 +177,9 @@
     <ClInclude Include="StairCase.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="Triangle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="smallMap.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
