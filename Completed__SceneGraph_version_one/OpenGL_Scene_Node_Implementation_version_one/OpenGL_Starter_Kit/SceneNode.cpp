@@ -102,6 +102,12 @@ std::vector<SceneNode*> SceneNode::GetChildren()
 {
 	return m_children;
 }
+void SceneNode::RemoveChild(int i)
+{
+	SceneNode* temp = m_children[i];
+	m_children.erase(m_children.begin() + i);
+	delete temp;
+}
 SceneNode* SceneNode::GetParent()
 {
 	return m_parent;

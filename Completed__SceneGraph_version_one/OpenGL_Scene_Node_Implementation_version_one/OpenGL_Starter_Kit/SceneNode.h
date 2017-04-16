@@ -27,6 +27,7 @@ public:
 	void SetScale(glm::vec3 scale);
 	glm::mat4 SceneNode::GetTransformationMatrix();
 	std::vector<SceneNode*> GetChildren();
+	void RemoveChild(int i);
 	SceneNode* SceneNode::GetParent();
 	void SceneNode::SetParent(SceneNode* p);
 	void SceneNode::Render();

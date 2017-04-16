@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneNode.h"
 #include "GridNode.h"
+#include "Circle.h"
 
 enum Direction
 {
@@ -28,6 +29,7 @@ private:
 	float m_x;
 	float m_y;
 
+	Circle* m_pacman;
 	float m_radius;
 	float m_moveSpeed;
 	float m_frameCount;

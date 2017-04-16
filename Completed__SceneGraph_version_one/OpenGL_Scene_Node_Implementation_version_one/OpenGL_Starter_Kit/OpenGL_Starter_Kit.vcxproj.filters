@@ -109,5 +109,8 @@
     <Text Include="smallMap.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="mainMap.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

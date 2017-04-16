@@ -6,12 +6,15 @@ PacMan::PacMan(GridNode* startNode, float xPos, float yPos, glm::mat4 transforma
 {
 	m_currentNode = startNode;
 	m_currentDirection = None;
-	m_x = xPos;
-	m_y = yPos;
+	m_x = startNode->x();
+	m_y = startNode->y();
 
 	m_radius = radius;
-	m_moveSpeed = 0.5f;
+	m_moveSpeed = 0.05f;
 	m_frameCount = 0;
+
+	m_pacman = new Circle(glm::translate(glm::mat4(1.0), glm::vec3(m_x, m_y, 0.0f)), 1, m_radius);
+	this->AddChild(m_pacman);
 }
 
 PacMan::~PacMan()
@@ -25,6 +28,7 @@ void PacMan::Update(float deltaTime)
 	{
 		if (m_frameCount <= 0)
 		{
+			printf("Dir %i\n", (int)m_currentDirection);
 			GridNode* nextNode = m_currentNode->GetConnectedNode((int)m_currentDirection);
 			printf("%i\n", (int)nextNode->GetNodeType());
 			if (nextNode != nullptr && nextNode->GetNodeType() != Wall)
@@ -49,12 +53,14 @@ void PacMan::Update(float deltaTime)
 
 void PacMan::Draw()
 {
-	Circle* body = new Circle(glm::translate(glm::mat4(1.0), glm::vec3(m_x, m_y, 0.0f)), 1, m_radius);
-	body->SetColor(1, 1, 0);
-	this->AddChild(body);
+	m_pacman = new Circle(glm::translate(glm::mat4(1.0), glm::vec3(m_x, m_y, 0.0f)), 1, m_radius);
+	m_pacman->SetColor(1, 1, 0);
+	this->RemoveChild(0);
+	this->AddChild(m_pacman);
 }
 
 void PacMan::SetDirection(Direction dir)
 {
+	printf("Setting dir %i", dir);
 	m_currentDirection = dir;
 }

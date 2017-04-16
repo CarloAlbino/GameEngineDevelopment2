@@ -92,7 +92,7 @@ void Render(void)
 
 void InitializeModels(void)
 {
-	GameGrid* grid = new GameGrid("smallMap.txt", glm::mat4(1.0f), 1.0f);
+	GameGrid* grid = new GameGrid("mainMap.txt", glm::mat4(1.0f), 1.0f);
 	g_models.push_back(grid);
 
 }

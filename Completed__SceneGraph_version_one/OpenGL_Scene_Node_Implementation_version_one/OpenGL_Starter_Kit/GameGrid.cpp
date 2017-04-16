@@ -150,12 +150,16 @@ void GameGrid::UpdateInput(char key, bool down)
 		{
 		case 'w':
 			m_pacman->SetDirection(Up);
+			break;
 		case 's':
 			m_pacman->SetDirection(Down);
+			break;
 		case 'a':
 			m_pacman->SetDirection(Left);
+			break;
 		case 'd':
 			m_pacman->SetDirection(Right);
+			break;
 		default:
 			//do nothing
 			break;
@@ -166,13 +170,13 @@ void GameGrid::UpdateInput(char key, bool down)
 		switch (key)
 		{
 		case 'w':
-
+			break;
 		case 's':
-
+			break;
 		case 'a':
-
+			break;
 		case 'd':
-
+			break;
 		default:
 			//do nothing
 			break;
