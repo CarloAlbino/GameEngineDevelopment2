@@ -1,21 +1,7 @@
-﻿  Triangle.cpp
-  Tank.cpp
-  Starter_Class.cpp
-  StairCase.cpp
-  Square.cpp
-  Sphere.cpp
-d:\github\gameenginedevelopment2\completed__scenegraph_version_one\opengl_scene_node_implementation_version_one\opengl_starter_kit\sphere.cpp(50): warning C4018: '<': signed/unsigned mismatch
-d:\github\gameenginedevelopment2\completed__scenegraph_version_one\opengl_scene_node_implementation_version_one\opengl_starter_kit\sphere.cpp(69): warning C4018: '<': signed/unsigned mismatch
-  SceneNode.cpp
-d:\github\gameenginedevelopment2\completed__scenegraph_version_one\opengl_scene_node_implementation_version_one\opengl_starter_kit\scenenode.cpp(145): warning C4018: '<': signed/unsigned mismatch
-  PacMan.cpp
-  GridNode.cpp
-d:\github\gameenginedevelopment2\completed__scenegraph_version_one\opengl_scene_node_implementation_version_one\opengl_starter_kit\gridnode.cpp(52): warning C4018: '<': signed/unsigned mismatch
-  GameGrid.cpp
-  Cylinder.cpp
-  Cube.cpp
-  Cone.cpp
-  Circle.cpp
+﻿  PacMan.cpp
   Generating Code...
+  Skipping... (no relevant changes detected)
+  Starter_Class.cpp
+  GameGrid.cpp
   OpenGL_Starter_Kit.vcxproj -> D:\GitHub\GameEngineDevelopment2\Completed__SceneGraph_version_one\OpenGL_Scene_Node_Implementation_version_one\Debug\OpenGL_Starter_Kit.exe
   OpenGL_Starter_Kit.vcxproj -> D:\GitHub\GameEngineDevelopment2\Completed__SceneGraph_version_one\OpenGL_Scene_Node_Implementation_version_one\Debug\OpenGL_Starter_Kit.pdb (Partial PDB)

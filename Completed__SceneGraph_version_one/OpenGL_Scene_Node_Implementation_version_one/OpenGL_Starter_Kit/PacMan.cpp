@@ -10,7 +10,7 @@ PacMan::PacMan(GridNode* startNode, float xPos, float yPos, glm::mat4 transforma
 	m_y = startNode->y();
 
 	m_radius = radius;
-	m_moveSpeed = 0.05f;
+	m_moveStep = 0.02f;
 	m_frameCount = 0;
 
 	m_pacman = new Circle(glm::translate(glm::mat4(1.0), glm::vec3(m_x, m_y, 0.0f)), 1, m_radius);
@@ -23,22 +23,27 @@ PacMan::~PacMan()
 
 void PacMan::Update(float deltaTime)
 {
-	printf("%f\n", m_frameCount);
+	//printf("%f\n", m_frameCount);
 	if (m_currentDirection != None)
 	{
 		if (m_frameCount <= 0)
 		{
-			printf("Dir %i\n", (int)m_currentDirection);
+			//printf("Dir %i\n", (int)m_currentDirection);
 			GridNode* nextNode = m_currentNode->GetConnectedNode((int)m_currentDirection);
-			printf("%i\n", (int)nextNode->GetNodeType());
+			//printf("%i\n", (int)nextNode->GetNodeType());
 			if (nextNode != nullptr && nextNode->GetNodeType() != Wall)
 			{
 				m_currentNode = nextNode;
+				// Pickup dot
+				if (m_currentNode->GetNodeType() == Dot)
+				{
+					m_currentNode->SetNodeType(Empty);
+				}
 			}
 			m_x = m_currentNode->x();
 			m_y = m_currentNode->y();
 
-			m_frameCount = m_moveSpeed;
+			m_frameCount = m_moveStep;
 		}
 		else
 		{

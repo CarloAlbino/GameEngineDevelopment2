@@ -18,7 +18,7 @@ public:
 	PacMan(GridNode* startNode, float xPos, float yPos, glm::mat4 transformation, float scale, float radius);
 	~PacMan();
 
-	void Update(float deltaTime);
+	void Update(float deltaTime) override;
 	void Draw() override;
 
 	void SetDirection(Direction dir);
@@ -31,7 +31,7 @@ private:
 
 	Circle* m_pacman;
 	float m_radius;
-	float m_moveSpeed;
+	float m_moveStep;
 	float m_frameCount;
 
 };

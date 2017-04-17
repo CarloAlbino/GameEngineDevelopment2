@@ -108,6 +108,27 @@ void SceneNode::RemoveChild(int i)
 	m_children.erase(m_children.begin() + i);
 	delete temp;
 }
+void SceneNode::RemoveChildren()
+{
+	for (int i = 0; i < m_children.size(); i++)
+	{
+		SceneNode* temp = m_children[i];
+		m_children.erase(m_children.begin() + i);
+		delete temp;
+	}
+}
+void SceneNode::RemoveChildrenInRange(int start, int end)
+{
+	for (int i = start; i < end + 1; i++)
+	{
+		if (i < m_children.size() && i > -1)
+		{
+			SceneNode* temp = m_children[i];
+			m_children.erase(m_children.begin() + i);
+			delete temp;
+		}
+	}
+}
 SceneNode* SceneNode::GetParent()
 {
 	return m_parent;

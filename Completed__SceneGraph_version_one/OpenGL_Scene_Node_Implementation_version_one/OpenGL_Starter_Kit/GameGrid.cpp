@@ -186,6 +186,7 @@ void GameGrid::UpdateInput(char key, bool down)
 
 void GameGrid::Draw()
 {
+	this->RemoveChildrenInRange(1, m_children.size() - 1);
 	for (int width = 0; width < m_width; width++)
 	{
 		for (int height = 0; height < m_height; height++)

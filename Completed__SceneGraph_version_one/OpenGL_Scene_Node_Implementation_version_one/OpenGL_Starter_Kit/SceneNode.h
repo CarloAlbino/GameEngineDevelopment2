@@ -28,6 +28,8 @@ public:
 	glm::mat4 SceneNode::GetTransformationMatrix();
 	std::vector<SceneNode*> GetChildren();
 	void RemoveChild(int i);
+	void RemoveChildren();
+	void RemoveChildrenInRange(int start, int end);
 	SceneNode* SceneNode::GetParent();
 	void SceneNode::SetParent(SceneNode* p);
 	void SceneNode::Render();

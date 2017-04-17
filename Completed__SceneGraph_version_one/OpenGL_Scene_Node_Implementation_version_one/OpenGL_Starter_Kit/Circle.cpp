@@ -20,7 +20,7 @@ void Circle::Draw()
 	if (slices != 0)
 		theta = 360 / slices * (M_PI / 180);
 
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_TRIANGLE_FAN);//GL_LINE_LOOP);
 
 	for (int i = 0; i < slices; i++) {
 		float angle = theta * i;
