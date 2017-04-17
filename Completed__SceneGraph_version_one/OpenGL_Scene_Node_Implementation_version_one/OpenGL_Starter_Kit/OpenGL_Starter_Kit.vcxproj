@@ -153,6 +153,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="GameGrid.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="GridNode.cpp" />
     <ClCompile Include="PacMan.cpp" />
     <ClCompile Include="SceneNode.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="GameGrid.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="GridNode.h" />
     <ClInclude Include="PacMan.h" />
     <ClInclude Include="Primitives.h" />

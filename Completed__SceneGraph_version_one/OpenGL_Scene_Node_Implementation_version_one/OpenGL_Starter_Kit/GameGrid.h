@@ -5,6 +5,7 @@
 #include "GridNode.h"
 #include "SceneNode.h"
 #include "PacMan.h"
+#include "Ghost.h"
 
 class GameGrid : public SceneNode
 {
@@ -27,6 +28,7 @@ private:
 	GridNode* m_fillerNode;
 
 	PacMan* m_pacman;
+	std::vector<Ghost*> m_ghosts;
 
 	int m_width;
 	int m_height;

@@ -5,7 +5,7 @@
 GameGrid::GameGrid(char * mapFile, glm::mat4 transformation, float scale)
 	: SceneNode(transformation, scale)
 {
-	printf("Creating a new game grid\n");
+	//printf("Creating a new game grid\n");
 
 	// Load the map file
 	std::ifstream inFile;
@@ -27,17 +27,17 @@ GameGrid::GameGrid(char * mapFile, glm::mat4 transformation, float scale)
 		//printf("%c", input);
 		if (input[0] == 'x')	  // Get the width of the grid
 		{
-			printf("%s: ", input);
+			//printf("%s: ", input);
 			inFile >> input;
 			m_width = atoi(input);
-			printf("%i\n", m_width);
+			//printf("%i\n", m_width);
 		}
 		else if (input[0] == 'y') // Get the height of the grid
 		{
-			printf("%s: ", input);
+			//printf("%s: ", input);
 			inFile >> input;
 			m_height = atoi(input);
-			printf("%i\n", m_height);
+			//printf("%i\n", m_height);
 		}
 		else if (input[0] == 'n')  // The input is a node
 		{
@@ -55,17 +55,17 @@ GameGrid::GameGrid(char * mapFile, glm::mat4 transformation, float scale)
 			default:
 				// Empty node
 				newType = Empty;
-				printf("empty\n");
+				//printf("empty\n");
 				break;
 			case 'w':
 				// Wall node
 				newType = Wall;
-				printf("wall\n");
+				//printf("wall\n");
 				break;
 			case 'd':
 				// Dot node
 				newType = Dot;
-				printf("dot\n");
+				//printf("dot\n");
 				break;
 			}
 
@@ -76,8 +76,8 @@ GameGrid::GameGrid(char * mapFile, glm::mat4 transformation, float scale)
 			inFile >> input;
 			y = atof(input);
 
-			printf("x pos: %f ", x);
-			printf("y pos: %f\n", y);
+			//printf("x pos: %f ", x);
+			//printf("y pos: %f\n", y);
 
 			// Create and attach the new node
 			GridNode* newNode = new GridNode(x, y, newType);
@@ -107,8 +107,31 @@ GameGrid::GameGrid(char * mapFile, glm::mat4 transformation, float scale)
 	SetNodeConnections();
 	
 	// Create pacman
-	m_pacman = new PacMan(GetNodeAt(1, 2), 1, 2, glm::mat4(1), 1, 0.04);
+	m_pacman = new PacMan(GetNodeAt(9, 10), 1, 2, glm::mat4(1), 1, 0.04);
 	this->AddChild(m_pacman);
+	// Create Ghosts
+	Ghost* inky = new Ghost(GetNodeAt(1, 1), m_pacman, 1.0f, 0.25f, 0.6f, glm::mat4(1), 1);
+	m_ghosts.push_back(inky);
+	this->AddChild(inky);
+	Ghost* binky = new Ghost(GetNodeAt(17, 1), m_pacman, 0.0f, 0.75f, 1.0f, glm::mat4(1), 1);
+	m_ghosts.push_back(binky);
+	this->AddChild(binky);
+	Ghost* dinky = new Ghost(GetNodeAt(1, 17), m_pacman, 1.0f, 0.5f, 0.0f, glm::mat4(1), 1);
+	m_ghosts.push_back(dinky);
+	this->AddChild(dinky);
+	Ghost* Clyde = new Ghost(GetNodeAt(17, 17), m_pacman, 1.0f, 0.0f, 0.0f, glm::mat4(1), 1);
+	m_ghosts.push_back(Clyde);
+	this->AddChild(Clyde);
+
+	// Give a reference to the other ghosts to each ghost ignoring itself
+	for (int i = 0; i < m_ghosts.size(); i++)
+	{
+		for (int j = 0; j < m_ghosts.size(); j++)
+		{
+			if(i != j)
+				m_ghosts[i]->AddGhostReference(m_ghosts[j]);
+		}
+	}
 }
 
 GameGrid::~GameGrid()
@@ -140,6 +163,10 @@ int GameGrid::GetHeight()
 void GameGrid::Update(float deltaSeconds)
 {
 	m_pacman->Update(deltaSeconds);
+	for (int i = 0; i < m_ghosts.size(); i++)
+	{
+		m_ghosts[i]->Update(deltaSeconds);
+	}
 }
 
 void GameGrid::UpdateInput(char key, bool down)
@@ -186,7 +213,7 @@ void GameGrid::UpdateInput(char key, bool down)
 
 void GameGrid::Draw()
 {
-	this->RemoveChildrenInRange(1, m_children.size() - 1);
+	this->RemoveChildrenInRange(5, m_children.size() - 1);
 	for (int width = 0; width < m_width; width++)
 	{
 		for (int height = 0; height < m_height; height++)

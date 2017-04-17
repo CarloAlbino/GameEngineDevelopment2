@@ -10,7 +10,7 @@ PacMan::PacMan(GridNode* startNode, float xPos, float yPos, glm::mat4 transforma
 	m_y = startNode->y();
 
 	m_radius = radius;
-	m_moveStep = 0.02f;
+	m_moveStep = 0.07f;
 	m_frameCount = 0;
 
 	m_pacman = new Circle(glm::translate(glm::mat4(1.0), glm::vec3(m_x, m_y, 0.0f)), 1, m_radius);
@@ -66,6 +66,21 @@ void PacMan::Draw()
 
 void PacMan::SetDirection(Direction dir)
 {
-	printf("Setting dir %i", dir);
+	//printf("Setting dir %i", dir);
 	m_currentDirection = dir;
+}
+
+float PacMan::x()
+{
+	return m_x;
+}
+
+float PacMan::y()
+{
+	return m_y;
+}
+
+GridNode * PacMan::GetNode()
+{
+	return m_currentNode;
 }

@@ -1,5 +1,4 @@
 #pragma once
-#include "SceneNode.h"
 #include "GridNode.h"
 #include "Circle.h"
 
@@ -22,6 +21,9 @@ public:
 	void Draw() override;
 
 	void SetDirection(Direction dir);
+	float x();
+	float y();
+	GridNode* GetNode();
 
 private:
 	Direction m_currentDirection;
